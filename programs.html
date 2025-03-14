@@ -1,0 +1,1306 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cairo University Academic Programs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #a855f7;
+      --dark-color: #1a1a1a;
+      --light-color: #f8f9fa;
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Navbar Styles */
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 0.8rem 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white !important;
+    }
+    
+    .nav-link {
+      color: white !important;
+      margin: 0 0.3rem;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0.8rem !important;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: var(--transition);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .btn-login {
+      background-color: transparent;
+      border: 1px solid white;
+      color: white !important;
+      transition: var(--transition);
+    }
+    
+    .btn-login:hover {
+      background-color: white;
+      color: var(--primary-color) !important;
+    }
+    
+    .btn-apply {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11);
+    }
+    
+    .btn-apply:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1);
+    }
+    
+    /* Header Section */
+    .header-section {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-section::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(rgba(255, 255, 255, 0.1), transparent);
+      z-index: 1;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    
+    /* Program Categories */
+    .category-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: none;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-img {
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .category-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+      display: flex;
+      align-items: flex-end;
+    }
+    
+    .category-content {
+      padding: 1.5rem;
+      color: white;
+      width: 100%;
+    }
+    
+    .category-icon {
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    /* Program Cards */
+    .program-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .program-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .program-img {
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .program-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+    }
+    
+    .program-details {
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f5f5f5;
+      font-size: 0.9rem;
+    }
+    
+    .program-details span {
+      display: flex;
+      align-items: center;
+    }
+    
+    .program-details i {
+      margin-right: 5px;
+      color: var(--primary-color);
+    }
+    
+    .program-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+    
+    /* FAQ Section */
+    .faq-item {
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .faq-header {
+      padding: 1rem;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .faq-header:hover {
+      background-color: #e9ecef;
+    }
+    
+    .faq-header h5 {
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-icon {
+      transition: var(--transition);
+    }
+    
+    .faq-body {
+      padding: 1rem;
+      display: none;
+    }
+    
+    .faq-header.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    
+    .faq-header.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    /* Testimonials */
+    .testimonial-section {
+      background-color: #f5f5f5;
+    }
+    
+    .testimonial-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: none;
+      margin-bottom: 1.5rem;
+      padding: 2rem;
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-quote {
+      font-size: 3rem;
+      color: var(--primary-color);
+      opacity: 0.2;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+    
+    .testimonial-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-color);
+    }
+    
+    /* Application Process */
+    .process-step {
+      text-align: center;
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .process-step::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background-color: #e9ecef;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .process-step:last-child::before {
+      display: none;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+    
+    .footer h5 {
+      position: relative;
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .footer h5::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      bottom: 0;
+      left: 0;
+    }
+    
+    .footer a {
+      color: #a0aec0;
+      text-decoration: none;
+      transition: var(--transition);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .category-card, .program-card {
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-section {
+        padding: 2rem 0;
+      }
+      
+      .footer h5 {
+        margin-top: 1.5rem;
+      }
+      
+      .process-step::before {
+        left: 25px;
+        top: 50px;
+        height: calc(100% - 50px);
+      }
+      
+      .step-number {
+        margin: 0 0 1rem 0;
+      }
+      
+      .process-step {
+        text-align: left;
+        padding-left: 70px;
+      }
+    }
+
+    
+.accordion-button:not(.collapsed) {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.accordion-item {
+  margin-bottom: 1rem;
+  border-radius: 8px !important;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-body {
+  background-color: #f8f9fa;
+}
+
+.accordion-body ul {
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+    </style>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Cairo University Portal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="programs.html">Programs</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        </ul>
+        <button class="btn btn-login ms-3">Login</button>
+        <button class="btn btn-apply btn-primary ms-2">Apply Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="header-section">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="display-4 fw-bold mb-3">Academic Programs</h1>
+        <p class="lead mb-4">Explore our diverse range of graduate and professional programs</p>
+   
+      </div>
+    </div>
+  </section>
+
+  <!-- Program Categories Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-2">Explore Professional Programs</h2>
+      <p class="text-center text-muted mb-5">Discover specialized programs offered by the Faculty of Graduate Studies for Statistical Research</p>
+      
+      <div class="row">
+        <!-- Category 1: Software Engineering -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Software Engineering">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-laptop-code text-white"></i>
+                </div>
+                <h4>Software Engineering</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#software-engineering" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category 2: Web Design -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Web Design">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-globe text-white"></i>
+                </div>
+                <h4>Web Design</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#web-design" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category 3: Project Management -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Project Management">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-tasks text-white"></i>
+                </div>
+                <h4>Project Management</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#project-management" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category 4: Operations Research -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Operations Research">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-cogs text-white"></i>
+                </div>
+                <h4>Operations Research & Decision Support</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#operations-research" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category 5: Risk Management -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Risk Management">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-exclamation-triangle text-white"></i>
+                </div>
+                <h4>Risk & Crisis Management</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#risk-management" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Category 6: Human Resources -->
+        <div class="col-lg-4 col-md-6">
+          <div class="category-card">
+            <img src="/api/placeholder/400/200" class="card-img-top category-img" alt="Human Resources">
+            <div class="category-overlay">
+              <div class="category-content">
+                <div class="category-icon">
+                  <i class="fas fa-users text-white"></i>
+                </div>
+                <h4>Human Resources Management</h4>
+                <p class="mb-2">Diploma, Master's, Doctorate</p>
+                <a href="#human-resources" class="text-white">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#all-programs" class="btn btn-outline-primary">View All Programs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FGSSR Programs Section -->
+  <section class="py-5 bg-light" id="fgssr">
+    <div class="container">
+      <h2 class="text-center mb-2">Faculty of Graduate Studies for Statistical Research</h2>
+      <p class="text-center text-muted mb-5">Professional programs designed to meet industry demands and develop technical expertise</p>
+      
+      <div class="row mb-5">
+        <div class="col-lg-6">
+          <img src="img/FGSSR.jpg" alt="FGSSR Building" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-lg-6">
+          <h3 class="mb-3">About the Faculty</h3>
+          <p>The Faculty of Graduate Studies for Statistical Research (FGSSR) is one of Egypt's oldest and most prestigious institutions for advanced education in statistics, computer science, and related fields. For over 70 years, FGSSR has been a leader in statistical education and research.</p>
+          
+          <p>The faculty offers a wide range of professional programs designed to provide students with the technical skills and expertise required in today's job market. With 18+ specialized programs, FGSSR prepares graduates to excel in various fields including data science, software engineering, risk management, and more.</p>
+          
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <button class="btn btn-primary">Contact Faculty</button>
+            <button class="btn btn-outline-primary">Download Brochure</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Software Engineering Program -->
+      <div class="card border-0 shadow-lg mb-5">
+        <div class="card-body p-4">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <h3 class="card-title text-primary">Software Engineering Professional Master's Degree</h3>
+              <p class="card-text lead mb-3">A comprehensive program designed to develop advanced skills in software development, design, and engineering principles.</p>
+              
+              <div class="d-flex flex-wrap gap-3 mb-3">
+                <span class="badge bg-primary">Professional Master's</span>
+                <span class="badge bg-info">2 Years Duration</span>
+                <span class="badge bg-success">39 Credit Hours</span>
+              </div>
+              
+              <p>The Software Engineering Master's Program consists of two main phases:</p>
+              <ul>
+                <li><strong>Phase 1:</strong> Students must complete 21 credit hours of coursework spread across two academic semesters</li>
+                <li><strong>Phase 2:</strong> Choose between Research Track (thesis) or Coursework Track (additional 21 credit hours including a project)</li>
+              </ul>
+              
+              <div class="mt-4">
+                <a href="#se-details" class="btn btn-outline-primary" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="se-details">
+                  View Program Details <i class="fas fa-chevron-down ms-1"></i>
+                </a>
+              </div>
+              
+              <div class="collapse mt-3" id="se-details">
+                <div class="card card-body bg-light border-0">
+                  <h5 class="mb-3">Prerequisites</h5>
+                  <ul>
+                    <li><strong>Academic qualifications:</strong> Bachelor's degree in ITC or equivalent field</li>
+                    <li><strong>For non-ITC majors:</strong> Completion of the pre-master Software Engineering Diploma Program</li>
+                    <li><strong>Screening interview:</strong> With the university's committee</li>
+                  </ul>
+                  
+                  <h5 class="mb-3 mt-4">Course Structure</h5>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-primary">
+                        <tr>
+                          <th colspan="3">First Year - First Semester (9 CHs)</th>
+                        </tr>
+                        <tr>
+                          <th>Course Code</th>
+                          <th>Course Title</th>
+                          <th>C.H</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>SE201</td>
+                          <td>Principles and Methodologies of Scientific Research</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>SE202</td>
+                          <td>Software Quality Assurance</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>SE203</td>
+                          <td>Advanced Topics in Database</td>
+                          <td>3</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  <div class="table-responsive mt-3">
+                    <table class="table table-bordered">
+                      <thead class="table-primary">
+                        <tr>
+                          <th colspan="3">First Year - Second Semester (12 CHs)</th>
+                        </tr>
+                        <tr>
+                          <th>Course Code</th>
+                          <th>Course Title</th>
+                          <th>C.H</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>SE204</td>
+                          <td>Advanced Topics in Information Systems</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>SE205</td>
+                          <td>Information Security</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>SE206</td>
+                          <td>Advanced Agile Software Development</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>SE207</td>
+                          <td>Project</td>
+                          <td>3</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  <h5 class="mb-3 mt-4">Learning Outcomes</h5>
+                  <p>Graduates will be able to:</p>
+                  <ul>
+                    <li>Conduct scientific research in software engineering</li>
+                    <li>Implement advanced software quality assurance techniques</li>
+                    <li>Design and manage complex database systems</li>
+                    <li>Develop secure information systems</li>
+                    <li>Create cloud-based applications</li>
+                    <li>Apply machine learning concepts</li>
+                    <li>Lead software development projects</li>
+                  </ul>
+                  
+                  <h5 class="mb-3 mt-4">Grading System</h5>
+                  <ul>
+                    <li><strong>Midterm Work:</strong> 60% (Assignments, Quizzes, Projects, and Midterm Exams)</li>
+                    <li><strong>Final Examination:</strong> 40%</li>
+                    <li><strong>Passing Criteria:</strong> Minimum overall grade of 50/100 and minimum 20/40 in final exam</li>
+                  </ul>
+                  
+                  <h5 class="mb-3 mt-4">Student Information System</h5>
+                  <p>Access the FGSSR SIS platform at <a href="https://csds.cu.edu.eg/" target="_blank">https://csds.cu.edu.eg/</a></p>
+                  <ul>
+                    <li>Username is University ID</li>
+                    <li>Password is National ID</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="p-3 bg-light rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 160px; height: 160px;">
+                <i class="fas fa-laptop-code fa-5x text-primary"></i>
+              </div>
+              <div class="mt-4">
+                <a href="#" class="btn btn-primary w-100 mb-2">Apply Now</a>
+                <a href="#" class="btn btn-outline-primary w-100">Download Curriculum</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- All Programs Section -->
+      <h3 class="text-center mb-4" id="all-programs">All Professional Programs</h3>
+      
+      <div class="row g-4">
+        <!-- Program 1: Data Analysis -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-chart-line text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Data Analysis</h5>
+              </div>
+              <p class="card-text">Develop skills in analyzing qualitative and quantitative data using advanced statistical techniques.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 2: Statistical Quality Control -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-check-circle text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Statistical Quality Control</h5>
+              </div>
+              <p class="card-text">Master statistical methods and techniques to improve quality control processes in various industries.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 3: Statistical Research -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-search text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Statistical Research & Development</h5>
+              </div>
+              <p class="card-text">Learn advanced research methodologies and development techniques for statistical applications.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 4: Applied Statistics -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-table text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Applied Statistics</h5>
+              </div>
+              <p class="card-text">Master statistical methods and their practical applications in solving real-world problems.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 5: Time Series Analysis -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-chart-area text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Time Series Analysis</h5>
+              </div>
+              <p class="card-text">Develop expertise in analyzing time series data and forecasting methods for economic and business applications.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 6: Statistical Computing -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-calculator text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Statistical Computing</h5>
+              </div>
+              <p class="card-text">Master computational methods and software applications for statistical analysis and data processing.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 7: Life Testing -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-hourglass-half text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Life Testing & Reliability Analysis</h5>
+              </div>
+              <p class="card-text">Learn statistical methods for analyzing product lifecycles and reliability in engineering applications.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 8: Population Studies -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-users text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Population Policies & Data Analysis</h5>
+              </div>
+              <p class="card-text">Develop skills in analyzing population data and formulating effective demographic policies.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 9: Public Opinion Polls -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-poll text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Public Opinion Polls</h5>
+              </div>
+              <p class="card-text">Master techniques for designing, conducting, and analyzing public opinion surveys and polls.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 10: Surveys & Reporting -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-clipboard-list text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Surveys & Reporting</h5>
+              </div>
+              <p class="card-text">Learn methods for designing surveys, collecting data, and creating effective analytical reports.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 11: Human Development -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-user-graduate text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Human Development & Resources</h5>
+              </div>
+              <p class="card-text">Develop comprehensive understanding of human development metrics and resource allocation strategies.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Diploma</span>
+                <span class="badge bg-primary me-2">Master's</span>
+                <span class="badge bg-primary">Doctorate</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Program 12: Supply Chain Management -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow-sm hover-translate">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                  <i class="fas fa-truck text-white"></i>
+                </div>
+                <h5 class="card-title mb-0">Supply Chain & Operations Management</h5>
+              </div>
+              <p class="card-text">Master techniques for optimizing supply chains and managing operations in
+    </div>
+  </section>
+
+  <!-- Application Process -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-2">How to Apply</h2>
+      <p class="text-center text-muted mb-5">Follow these steps to join our academic community</p>
+      
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="row">
+            <!-- Step 1 -->
+            <div class="col-md-4">
+              <div class="process-step">
+                <div class="step-number">1</div>
+                <h5>Choose a Program</h5>
+                <p>Browse our programs and select the one that matches your interests and career goals.</p>
+              </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="col-md-4">
+              <div class="process-step">
+                <div class="step-number">2</div>
+                <h5>Check Prerequisites</h5>
+                <p>Ensure you meet the academic qualifications and have the required documents ready.</p>
+              </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="col-md-4">
+              <div class="process-step">
+                <div class="step-number">3</div>
+                <h5>Submit Application</h5>
+                <p>Complete the online application form and pay the application fee through our portal.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-5">
+            <button class="btn btn-primary btn-lg">Start Your Application</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-5 testimonial-section">
+    <div class="container">
+      <h2 class="text-center mb-2">What Our Students Say</h2>
+      <p class="text-center text-muted mb-5">Hear from students who have experienced our programs</p>
+      
+      <div class="row">
+        <!-- Testimonial 1 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Ahmed Ibrahim</h5>
+                <p class="text-muted mb-0">Software Engineering, 2022</p>
+              </div>
+            </div>
+            <p class="mb-0">"The Software Engineering program at FGSSR gave me the advanced skills needed in today's job market. The professors were supportive and the curriculum was challenging in all the right ways. I secured a job as a senior developer before graduation."</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Nour Hossam</h5>
+                <p class="text-muted mb-0">Data Analysis, 2021</p>
+              </div>
+            </div>
+            <p class="mb-0">"The Data Analysis program equipped me with essential skills in statistical analysis and data visualization. The hands-on projects and case studies provided real-world experience that I apply daily in my role as a data analyst at a multinational company."</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Sara Mahmoud</h5>
+                <p class="text-muted mb-0">Project Management, 2023</p>
+              </div>
+            </div>
+            <p class="mb-0">"As a working professional, the flexibility of the program allowed me to continue my education while advancing my career. The knowledge and certification I gained helped me secure a promotion to project manager at my organization within months of graduation."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+ 
+  <!-- FAQ Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-2">Frequently Asked Questions</h2>
+      <p class="text-center text-muted mb-5">Find answers to common questions about our programs</p>
+      
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item">
+            <div class="faq-header" id="faq-header-1">
+              <h5>What are the admission requirements?
+                <i class="fas fa-chevron-down faq-icon"></i>
+              </h5>
+            </div>
+            <div class="faq-body" id="faq-body-1">
+              <p>Admission requirements vary by program but generally include a bachelor's degree from an accredited institution, official transcripts, application form, and may include interviews or entrance exams. Some programs require specific prerequisite courses for non-specialized applicants.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 2 -->
+          <div class="faq-item">
+            <div class="faq-header" id="faq-header-2">
+              <h5>Are scholarships available?
+                <i class="fas fa-chevron-down faq-icon"></i>
+              </h5>
+            </div>
+            <div class="faq-body" id="faq-body-2">
+              <p>Yes, Cairo University offers various scholarships based on academic merit, financial need, and special talents. International student scholarships are also available for specific programs. Contact the financial aid office for the most current information on scholarship opportunities.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 3 -->
+          <div class="faq-item">
+            <div class="faq-header" id="faq-header-3">
+              <h5>What is the grading system?
+                <i class="fas fa-chevron-down faq-icon"></i>
+              </h5>
+            </div>
+            <div class="faq-body" id="faq-body-3">
+              <p>For professional programs, the grading system typically consists of:</p>
+              <ul>
+                <li>Midterm work (60%): Includes assignments, quizzes, projects, and midterm exams</li>
+                <li>Final examination (40%)</li>
+                <li>To pass a course, students must receive at least 50/100 overall and a minimum of 20/40 in the final exam</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 4 -->
+          <div class="faq-item">
+            <div class="faq-header" id="faq-header-4">
+              <h5>How long does it take to complete a program?
+                <i class="fas fa-chevron-down faq-icon"></i>
+              </h5>
+            </div>
+            <div class="faq-body" id="faq-body-4">
+              <p>Program duration varies:</p>
+              <ul>
+                <li>Professional Diplomas: 1 year (2 semesters)</li>
+                <li>Master's Degrees: 2 years minimum (4 semesters)</li>
+                <li>Doctoral Degrees: 3-4 years minimum</li>
+              </ul>
+              <p>Each program has a maximum allowed duration for completion, which is specified in the program details.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 5 -->
+          <div class="faq-item">
+            <div class="faq-header" id="faq-header-5">
+              <h5>Can I transfer credits from another university?
+                <i class="fas fa-chevron-down faq-icon"></i>
+              </h5>
+            </div>
+            <div class="faq-body" id="faq-body-5">
+              <p>Yes, we accept transfer credits from accredited universities. Credits may be transferred if the courses are equivalent in content and level to those offered at Cairo University. The maximum number of transfer credits varies by program. Contact the admissions office for specific details about your situation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-5 testimonial-section">
+    <div class="container">
+      <h2 class="text-center mb-2">What Our Students Say</h2>
+      <p class="text-center text-muted mb-5">Hear from students who have experienced our programs</p>
+      
+      <div class="row">
+        <!-- Testimonial 1 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Ahmed Ibrahim</h5>
+                <p class="text-muted mb-0">Software Engineering, 2022</p>
+              </div>
+            </div>
+            <p class="mb-0">"The Software Engineering program at FGSSR gave me the advanced skills needed in today's job market. The professors were supportive and the curriculum was challenging in all the right ways. I secured a job as a senior developer before graduation."</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Nour Hossam</h5>
+                <p class="text-muted mb-0">Data Analysis, 2021</p>
+              </div>
+            </div>
+            <p class="mb-0">"The Data Analysis program equipped me with essential skills in statistical analysis and data visualization. The hands-on projects and case studies provided real-world experience that I apply daily in my role as a data analyst at a multinational company."</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="col-lg-4">
+          <div class="testimonial-card bg-white position-relative">
+            <i class="fas fa-quote-right testimonial-quote"></i>
+            <div class="d-flex align-items-center mb-4">
+              <img src="/api/placeholder/80/80" class="testimonial-img me-3" alt="Student">
+              <div>
+                <h5 class="mb-0">Sara Mahmoud</h5>
+                <p class="text-muted mb-0">Project Management, 2023</p>
+              </div>
+            </div>
+            <p class="mb-0">"As a working professional, the flexibility of the program allowed me to continue my education while advancing my career. The knowledge and certification I gained helped me secure a promotion to project manager at my organization within months of graduation."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h5>Cairo University</h5>
+          <p>Providing quality education since 1908. One of the oldest and most prestigious universities in Africa and the Middle East.</p>
+        </div>
+        <div class="col-lg-2">
+          <h5>Programs</h5>
+          <a href="#">Undergraduate</a>
+          <a href="#">Graduate</a>
+          <a href="#">Professional</a>
+          <a href="#">Online Courses</a>
+        </div>
+        <div class="col-lg-2">
+          <h5>Resources</h5>
+          <a href="#">Library</a>
+          <a href="#">Research</a>
+          <a href="#">Publications</a>
+          <a href="#">Career Services</a>
+        </div>
+        <div class="col-lg-4">
+          <h5>Contact Us</h5>
+          <p>Cairo University, Giza, Egypt<br>
+          Phone: +20 2 35676105<br>
+          Email: info@cu.edu.eg</p>
+          <div class="d-flex gap-3 mt-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center copyright">
+        <p>&copy; 2025 Cairo University. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all FAQ headers
+      const faqHeaders = document.querySelectorAll('.faq-header');
+      
+      // Add click event listeners to each header
+      faqHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          // Toggle active class on the header
+          this.classList.toggle('active');
+          
+          // Get the body element
+          const body = this.nextElementSibling;
+          
+          // Toggle the display of the body
+          if (this.classList.contains('active')) {
+            body.style.display = 'block';
+          } else {
+            body.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
