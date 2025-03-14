@@ -1,0 +1,194 @@
+flowchart TD
+    %% Main nodes
+    Portal["Cairo University Portal"]
+    Landing["Landing Page"]
+    Chatbot["Chatbot Assistant"]
+    SLogin["Student Login"]
+    ALogin["Admin Login"]
+    Student["Student Portal"]
+    Admin["Admin Portal"]
+    Info["Information Hub"]
+    
+    %% Student Portal subsections
+    Dashboard["Dashboard"]
+    Application["Application"]
+    Support["Support"]
+    
+    %% Dashboard features
+    StatusOverview["Status Overview"]
+    Notifications["Notifications"]
+    CertView["Certificates View"]
+  
+    
+    %% Application features
+    PersonalInfo["Personal Info"]
+    DocUpload["Document Upload"]
+    Payment["Payment"]
+    ReviewSubmit["Review & Submit"]
+    
+    %% Support features
+    CreateTicket["Create Ticket"]
+    ViewTickets["View Tickets"]
+    MessageHistory["Message History"]
+    
+    %% Information Hub subsections
+    About["About"]
+    Programs["Programs"]
+    Projects["Projects"]
+    
+    %% About features
+    UnivInfo["University Info"]
+    History["History"]
+    FAQs["FAQs"]
+    
+    %% Programs features
+    Graduate["Graduate"]
+    Admissions["Admissions"]
+    
+    %% Projects features
+    ProjectRepo["Project Repository"]
+    Search["Search"]
+    FeaturedProjects["Featured Projects"]
+    
+    %% Admin Portal subsections
+    Applications["Applications"]
+    Certificates["Certificates"]
+    AdminDashboard["Admin Dashboard"]
+    
+    %% Applications features
+    ReviewApps["Review Applications"]
+    ApproveReject["Approve/Reject"]
+    GenerateIDs["Generate Student IDs"]
+    
+    %% Certificates features
+    ProcessRequests["Process Requests"]
+    TrackStatus["Track Status"]
+    IssueCertificates["Issue Certificates"]
+    
+    %% Admin Dashboard features
+    Analytics["Analytics"]
+    ManageUsers["Manage Users"]
+    SupportTickets["Support Tickets"]
+    SystemSettings["System Settings"]
+    
+    %% Additional sections
+    Contact["Contact"]
+    Resources["Resources"]
+    
+    %% Contact features
+    ContactForm["Contact Form"]
+    LocationMap["Location/Map"]
+    
+    %% Resources features
+    StudentHandbook["Student Handbook"]
+    ResearchResources["Research Resources"]
+    
+    %% Main structure connections
+    Portal --> Landing
+    Landing --> Chatbot
+    Landing --> SLogin
+    Landing --> ALogin
+    Landing --> Info
+    
+    %% Login connections (dashed to show login required)
+    SLogin -.-> Student
+    ALogin -.-> Admin
+    
+    %% Student Portal structure
+    Student --> Dashboard
+    Student --> Application
+    Student --> Support
+    
+    Dashboard --> StatusOverview
+    Dashboard --> Notifications
+    Dashboard --> CertView
+    
+    Application --> PersonalInfo
+    Application --> DocUpload
+    Application --> Payment
+    Application --> ReviewSubmit
+    
+    Support --> CreateTicket
+    Support --> ViewTickets
+    Support --> MessageHistory
+    
+    %% Information Hub structure
+    Info --> About
+    Info --> Programs
+    Info --> Projects
+    
+    About --> UnivInfo
+    About --> History
+    About --> FAQs
+    About --> Ranks
+    About --> Achivemtns 
+    About --> Testomonial
+    About --> Accriditation
+    
+    Programs --> Graduate
+    Programs --> Admissions
+    
+    Projects --> ProjectRepo
+    Projects --> Search
+    Projects --> FeaturedProjects
+    
+    %% Admin Portal structure
+    Admin --> Applications
+    Admin --> Certificates
+    Admin --> AdminDashboard
+    
+    Applications --> ReviewApps
+    Applications --> ApproveReject
+    Applications --> GenerateIDs
+    
+    Certificates --> ProcessRequests
+    Certificates --> TrackStatus
+    Certificates --> IssueCertificates
+    
+    AdminDashboard --> Analytics
+    AdminDashboard --> ManageUsers
+    AdminDashboard --> SupportTickets
+    AdminDashboard --> SystemSettings
+    
+    %% Additional sections connections
+    Info --> Contact
+    Info --> Resources
+   
+    
+    Contact --> ContactForm
+    Contact --> LocationMap
+
+
+    Info --> Home
+    Home --> Ar
+    Home --> Header 
+    Home --> FacultyStats
+    Home --> GallaryInfo  
+    Home --> News
+    Home --> announcment
+
+      Home -->  category --> login
+   
+
+
+    
+    
+    
+    Resources --> StudentHandbook
+    Resources --> ResearchResources
+    
+    %% Styling
+    classDef mainTitle fill:#4338ca,color:white,stroke:#1e1b4b,stroke-width:2px
+    classDef mainSection fill:#6366f1,color:white,stroke:#1e1b4b,stroke-width:2px
+    classDef loginSection fill:#8b5cf6,color:white,stroke:#1e1b4b,stroke-width:2px
+    classDef subSection fill:#818cf8,color:white,stroke:#1e1b4b,stroke-width:2px
+    classDef featureBox fill:#93c5fd,color:#1e1b4b,stroke:#1e1b4b,stroke-width:2px
+    classDef chatbotBox fill:#7dd3fc,color:#1e1b4b,stroke:#1e1b4b,stroke-width:2px
+    
+    %% Apply styles
+    class Portal mainTitle
+    class Landing,Student,Admin,Info mainSection
+    class SLogin,ALogin loginSection
+    class Dashboard,Application,Support,About,Programs,Projects,Applications,Certificates,AdminDashboard,Contact,Resources subSection
+    class StatusOverview,Notifications,CertView,PersonalInfo,DocUpload,Payment,ReviewSubmit,CreateTicket,ViewTickets,MessageHistory,UnivInfo,History,FAQs,Graduate,Admissions,ProjectRepo,Search,FeaturedProjects,ReviewApps,ApproveReject,GenerateIDs,ProcessRequests,TrackStatus,IssueCertificates,Analytics,ManageUsers,SupportTickets,SystemSettings,ContactForm,LocationMap,StudentHandbook,ResearchResources featureBox
+    class Chatbot chatbotBox
