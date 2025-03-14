@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    .sidebar {
+      width: 250px;
+      transition: width 0.3s;
+    }
+    .sidebar.collapsed {
+      width: 80px;
+    }
+    .notification-badge {
+      top: -5px;
+      right: -5px;
+    }
+    .main-content {
+      margin-left: 250px;
+      transition: margin-left 0.3s;
+    }
+    .main-content.collapsed {
+      margin-left: 80px;
+    }
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .progress-step.active {
+      border-bottom: 2px solid #0d6efd;
+    }
+    /* Fix notification card positioning */
+    #notificationsPanel {
+      z-index: 1000; /* Ensure it appears above other content */
+      position: absolute;
+      right: 0;
+      top: 40px; /* Adjust based on header height */
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-primary text-white vh-100 position-fixed" id="sidebar">
+      <div class="p-3">
+        <h1 class="fs-5 mb-0">Student Portal</h1>
+      </div>
+      <nav class="mt-4">
+        <a href="#" class="d-block p-3 text-white text-decoration-none" onclick="changeTab('dashboard')">
+          <i class="bi bi-house-door"></i> <span>Dashboard</span>
+        </a>
+        <a href="#" class="d-block p-3 text-white text-decoration-none" onclick="changeTab('application')">
+          <i class="bi bi-file-earmark-text"></i> <span>Application</span>
+        </a>
+        <a href="#" class="d-block p-3 text-white text-decoration-none" onclick="changeTab('certificates')">
+          <i class="bi bi-award"></i> <span>Certificates</span>
+        </a>
+        <a href="#" class="d-block p-3 text-white text-decoration-none" onclick="changeTab('tickets')">
+          <i class="bi bi-chat-left-text"></i> <span>Support Tickets</span>
+        </a>
+      </nav>
+      <div class="position-absolute bottom-0 w-100 p-3">
+        <a href="#" class="d-block p-2 text-white text-decoration-none">
+          <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1" id="mainContent">
+      <!-- Header -->
+      <header class="bg-white shadow-sm p-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 class="fs-5 mb-0" id="pageTitle">Dashboard</h2>
+          <div class="d-flex align-items-center gap-3">
+            <!-- Notifications -->
+            <div class="position-relative">
+              <button class="btn btn-link text-dark p-0 position-relative" onclick="toggleNotifications()">
+                <i class="bi bi-bell fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" id="unreadCount">2</span>
+              </button>
+              <div class="position-absolute end-0 mt-2 w-300 bg-white rounded shadow-lg d-none" id="notificationsPanel">
+                <div class="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+                  <h3 class="fs-6 mb-0">Notifications</h3>
+                  <button class="btn btn-link text-white p-0 fs-7" onclick="markAllAsRead()">Mark all as read</button>
+                </div>
+                <div class="list-group list-group-flush" id="notificationsList">
+                  <!-- Notifications will be dynamically inserted here -->
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="bg-primary rounded-circle p-2 text-white">ST</div>
+              <span class="fs-6">Student</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="p-3">
+        <!-- Dashboard Tab -->
+        <div id="dashboardTab">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="fs-7 text-muted mb-1">Application Status</p>
+                      <h3 class="fs-4 mb-0">Under Review</h3>
+                    </div>
+                    <div class="bg-primary text-white rounded-circle p-3">
+                      <i class="bi bi-file-earmark-text fs-5"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="fs-7 text-muted mb-1">Payment Status</p>
+                      <h3 class="fs-4 mb-0">Pending</h3>
+                    </div>
+                    <div class="bg-primary text-white rounded-circle p-3">
+                      <i class="bi bi-award fs-5"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="fs-7 text-muted mb-1">Support Tickets</p>
+                      <h3 class="fs-4 mb-0">1</h3>
+                    </div>
+                    <div class="bg-primary text-white rounded-circle p-3">
+                      <i class="bi bi-chat-left-text fs-5"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="fs-7 text-muted mb-1">Certificates</p>
+                      <h3 class="fs-4 mb-0">0</h3>
+                    </div>
+                    <div class="bg-primary text-white rounded-circle p-3">
+                      <i class="bi bi-envelope fs-5"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Tab -->
+        <div id="applicationTab" class="d-none">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between mb-4">
+                <div class="progress-step active">Personal Information</div>
+                <div class="progress-step">Education Background</div>
+                <div class="progress-step">Program Selection</div>
+                <div class="progress-step">Document Upload</div>
+                <div class="progress-step">Review & Submit</div>
+              </div>
+              <div id="applicationForm">
+                <!-- Application form will be dynamically inserted here -->
+              </div>
+              <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-secondary" id="prevStepBtn">Previous</button>
+                <button class="btn btn-primary" id="nextStepBtn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates Tab -->
+        <div id="certificatesTab" class="d-none">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="fs-6 mb-4">Certificates</h2>
+              <div class="text-center text-muted">No certificates available at the moment.</div>
+              <button class="btn btn-primary w-100 mt-3">Request New Certificate</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tickets Tab -->
+        <div id="ticketsTab" class="d-none">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fs-6 mb-0">Support Tickets</h2>
+                <button class="btn btn-primary" id="createTicketBtn">Create New Ticket</button>
+              </div>
+              <div id="ticketsList">
+                <!-- Tickets will be dynamically inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for interactivity
+    let activeTab = 'dashboard';
+    let applicationStep = 0;
+    const applicationSteps = [
+      'Personal Information',
+      'Education Background',
+      'Program Selection',
+      'Document Upload',
+      'Review & Submit'
+    ];
+    const notifications = [
+      { id: 1, message: 'Your application is under review', time: '2 hours ago', read: false },
+      { id: 2, message: 'Payment reminder for enrollment', time: '1 day ago', read: false },
+      { id: 3, message: 'Certificate request processed', time: '3 days ago', read: true }
+    ];
+    let tickets = [
+      {
+        id: 'TKT-2023-001',
+        subject: 'Document Upload Issue',
+        status: 'Open',
+        date: '2023-03-15',
+        messages: [
+          { sender: 'You', text: 'I am having trouble uploading my degree certificate', time: '10:30 AM' },
+          { sender: 'Support', text: 'Can you please clarify the specific error you are encountering?', time: '11:15 AM' }
+        ]
+      }
+    ];
+
+    function changeTab(tab) {
+      activeTab = tab;
+      document.getElementById('pageTitle').textContent = tab.charAt(0).toUpperCase() + tab.slice(1);
+      document.querySelectorAll('[id$="Tab"]').forEach(el => el.classList.add('d-none'));
+      document.getElementById(`${tab}Tab`).classList.remove('d-none');
+      if (tab === 'application') {
+        renderApplicationForm();
+      } else if (tab === 'tickets') {
+        renderTickets();
+      }
+    }
+
+    function toggleNotifications() {
+      const panel = document.getElementById('notificationsPanel');
+      panel.classList.toggle('d-none');
+      markAllAsRead();
+    }
+
+    function markAllAsRead() {
+      notifications.forEach(n => n.read = true);
+      updateNotifications();
+    }
+
+    function updateNotifications() {
+      const unreadCount = notifications.filter(n => !n.read).length;
+      document.getElementById('unreadCount').textContent = unreadCount;
+      const notificationsList = document.getElementById('notificationsList');
+      notificationsList.innerHTML = notifications.map(n => `
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <p class="fs-7 mb-1">${n.message}</p>
+              <p class="fs-7 text-muted mb-0">${n.time}</p>
+            </div>
+            ${!n.read ? '<span class="badge bg-primary rounded-pill">New</span>' : ''}
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function renderApplicationForm() {
+      const form = document.getElementById('applicationForm');
+      form.innerHTML = `
+        <div class="space-y-4">
+          <h2 class="fs-6">${applicationSteps[applicationStep]}</h2>
+          ${applicationStep === 0 ? `
+            <input type="text" class="form-control" placeholder="Full Name">
+            <input type="date" class="form-control" placeholder="Date of Birth">
+            <select class="form-control">
+              <option>Select Nationality</option>
+              <option>Egyptian</option>
+              <option>International</option>
+            </select>
+          ` : applicationStep === 1 ? `
+            <input type="text" class="form-control" placeholder="Previous Degree">
+            <input type="text" class="form-control" placeholder="Institution">
+            <input type="number" class="form-control" placeholder="Graduation Year">
+          ` : applicationStep === 2 ? `
+            <select class="form-control">
+              <option>Select Program</option>
+              <option>Bachelor of Science</option>
+              <option>Master of Business Administration</option>
+              <option>PhD in Computer Science</option>
+              <option>Professional Diploma</option>
+            </select>
+          ` : applicationStep === 3 ? `
+            <div class="border-2 border-dashed p-4 text-center">
+              <input type="file" multiple class="d-none" id="documentUpload">
+              <label for="documentUpload" class="btn btn-outline-primary">
+                <i class="bi bi-upload"></i> Upload Documents
+              </label>
+            </div>
+          ` : applicationStep === 4 ? `
+            <div class="bg-light p-3 rounded">
+              <h3 class="fs-7">Application Summary</h3>
+              <p>Program: Not Selected</p>
+              <p>Documents Uploaded: 0</p>
+            </div>
+            <button class="btn btn-primary w-100">Submit Application</button>
+          ` : ''}
+        </div>
+      `;
+      updateProgressSteps();
+    }
+
+    function updateProgressSteps() {
+      const steps = document.querySelectorAll('.progress-step');
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index <= applicationStep);
+      });
+    }
+
+    function nextApplicationStep() {
+      if (applicationStep < applicationSteps.length - 1) {
+        applicationStep++;
+        renderApplicationForm();
+      }
+    }
+
+    function prevApplicationStep() {
+      if (applicationStep > 0) {
+        applicationStep--;
+        renderApplicationForm();
+      }
+    }
+
+    function renderTickets() {
+      const ticketsList = document.getElementById('ticketsList');
+      ticketsList.innerHTML = tickets.map(ticket => `
+        <div class="border p-3 mb-3 rounded">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="fs-7 mb-0">#${ticket.id}</h3>
+            <span class="badge ${ticket.status === 'Open' ? 'bg-danger' : ticket.status === 'In Progress' ? 'bg-warning' : 'bg-success'}">${ticket.status}</span>
+          </div>
+          <p class="fs-7 text-muted mb-2">${ticket.subject}</p>
+          <div class="bg-light p-3 rounded">
+            ${ticket.messages.map(msg => `
+              <div class="mb-2 ${msg.sender === 'You' ? 'text-end' : ''}">
+                <p class="fs-7 mb-0">${msg.text}</p>
+                <p class="fs-7 text-muted mb-0">${msg.time}</p>
+              </div>
+            `).join('')}
+          </div>
+          <div class="d-flex mt-3">
+            <input type="text" class="form-control me-2" placeholder="Type your message...">
+            <button class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Function to create a new ticket
+    function createNewTicket() {
+      const newTicket = {
+        id: `TKT-${new Date().getFullYear()}-${tickets.length + 1}`,
+        subject: 'New Support Ticket',
+        status: 'Open',
+        date: new Date().toISOString().split('T')[0],
+        messages: []
+      };
+      tickets.push(newTicket);
+      renderTickets();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      changeTab('dashboard');
+      updateNotifications();
+      document.getElementById('nextStepBtn').addEventListener('click', nextApplicationStep);
+      document.getElementById('prevStepBtn').addEventListener('click', prevApplicationStep);
+      document.getElementById('createTicketBtn').addEventListener('click', createNewTicket);
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
